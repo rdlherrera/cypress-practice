@@ -1,3 +1,4 @@
+header = 'Welcome to LUNARESHA Platform'
 brand = 'LUNARESHA'
 version = '1.0.0'
-footer = '© 2025 LUNARESHA'
+footer = '© 2025 LUNARESHA — Powered by QA Team'
