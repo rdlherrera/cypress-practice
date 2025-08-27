@@ -1,0 +1,3 @@
+brand = 'LUNARESHA'
+version = '1.0.0'
+footer = '© 2025 LUNARESHA'
