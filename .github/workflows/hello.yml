@@ -1,17 +1,42 @@
-name: Hello Actions
+name: Cypress Tests
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main ]   # Run on all PRs into main
   push:
-    branches: [ main ]
+    branches: [ main ]   # Run when code is pushed to main
 
 jobs:
-  hello-job:
+  cypress-run:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Print greeting
-        run: echo "🎉 Hello Ralph, your first GitHub Action works!"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests (headless)
+        run: npm test   # 'npm test' runs 'cypress run' from package.json
+
+      - name: Archive Cypress artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
