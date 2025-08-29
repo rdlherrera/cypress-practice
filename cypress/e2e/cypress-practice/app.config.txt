@@ -1,0 +1,5 @@
+header = 'Welcome to LUNARESHA Platform'
+brand = 'LUNARESHA'
+version = '1.0.0'
+footer = '© 2025 LUNARESHA — All rights reserved | Powered by QA Team'
+
